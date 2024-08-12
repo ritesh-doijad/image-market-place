@@ -44,7 +44,7 @@ export const loginUser = createAsyncThunk(
         email,
         password
       );
-      console.log(userCredential)
+      
       const { user } = userCredential;
       localStorage.setItem('token', user.accessToken);
     

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/Slices/authSlice";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,9 +18,11 @@ const Login = () => {
     setError("");
     const resultAction = await dispatch(loginUser({ email, password }));
     if (loginUser.fulfilled.match(resultAction)) {
+      const user = resultAction.payload;
       setEmail("");
       setPassword("");
-      navigate("/")
+      navigate(`/${user.accountType}/profile`);
+      toast.success("Login Successfull");
     } else if (loginUser.rejected.match(resultAction)) {
       setError("Login failed. Please check your credentials.");
     }
@@ -69,7 +72,10 @@ const Login = () => {
               required
             />
           </div>
-          <Link to="/forgot-password" className="text-sm text-gray-600 hover:text-black">
+          <Link
+            to="/forgot-password"
+            className="text-sm text-gray-600 hover:text-black"
+          >
             Forgot Password?
           </Link>
 
@@ -82,7 +88,9 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className={`w-full py-2 px-4 rounded-md shadow-md font-medium text-white text-sm bg-black ${loading && "opacity-50 cursor-not-allowed"}`}
+            className={`w-full py-2 px-4 rounded-md shadow-md font-medium text-white text-sm bg-black ${
+              loading && "opacity-50 cursor-not-allowed"
+            }`}
             disabled={loading}
             aria-label="Log In"
           >

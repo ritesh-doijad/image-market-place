@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../redux/Slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [userName, setUserName] = useState("");
@@ -27,6 +28,7 @@ const Signup = () => {
       setPassword("");
       setAccountType("buyer");
       navigate("/")
+      toast.success("User Registered SuccessFully")
     } else if (registerUser.rejected.match(resultAction)) {
       setError("User already exists");
     }
