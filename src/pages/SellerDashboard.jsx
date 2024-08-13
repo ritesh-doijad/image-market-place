@@ -1,8 +1,9 @@
 import React from 'react'
+import DashBoardSidebar from '../components/DashBoardSidebar'
 
 const SellerDashboard = () => {
   return (
-    <div className='font-semibold text-center text-lg'>SellerDashboard</div>
+    <DashBoardSidebar/>
   )
 }
 
