@@ -3,7 +3,7 @@ import DashBoardSidebar from '../components/DashBoardSidebar'
 
 const BuyerDashboard = () => {
   return (
-    <div className='font-semibold text-center text-lg'>
+    <div className='w-full h-screen'>
       <DashBoardSidebar/>
       BuyerDashboard</div>
   )

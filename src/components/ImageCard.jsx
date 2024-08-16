@@ -8,7 +8,7 @@ const ImageCard = ({id,img,auther,title,price,icon1,icon2}) => {
                     className='w-full h-full hover:scale-105 transition-all ease-linear duration-300 transform cursor-pointer' />
             </div>
             <p className='font-semibold text-white bg-black w-fit px-5 mt-3 py-1 rounded-full text-sm'>
-                {"@"+ auther.charAt(0).toUpperCase()+auther.slice(1)}</p>
+                {"@"+ auther?.charAt(0).toUpperCase()+auther?.slice(1)}</p>
             <div className='flex justify-between items-center mt-2' >
                 <div>
                     <h3 className='text-lg font-semibold'>{title}</h3>

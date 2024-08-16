@@ -28,7 +28,7 @@ function App() {
     <>
       <Navbar />
       <GsapTransition />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

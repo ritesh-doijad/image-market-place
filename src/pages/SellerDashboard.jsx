@@ -1,9 +1,15 @@
 import React from 'react'
 import DashBoardSidebar from '../components/DashBoardSidebar'
+import PhotoManagement from '../components/PhotoManagement'
 
 const SellerDashboard = () => {
   return (
-    <DashBoardSidebar/>
+    <div className='flex flex-col sm:flex-row '>
+      <DashBoardSidebar/>
+      {/*  */}
+      <PhotoManagement/>
+    </div>
+    
   )
 }
 
