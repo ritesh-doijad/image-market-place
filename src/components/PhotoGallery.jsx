@@ -131,10 +131,13 @@ const PhotoGallery = () => {
 
   useEffect(() => {
     if (isAuthenticated && currentUser) {
-      getAllImages();
       fetchFavoriteImages(); // Fetch favorite images when the component mounts
     }
   }, [isAuthenticated, currentUser, fetchFavoriteImages]);
+
+  useEffect(()=>{
+    getAllImages();
+  },[])
 
   const isImageInFavorites = (id) => {
     return favoriteImages.some((image) => image.id === id);
