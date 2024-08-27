@@ -3,8 +3,10 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 import {getStorage} from "firebase/storage"
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCM16-9JGs_neBKxMynqETqz2bjkgDIfXs",
+  apiKey:"AIzaSyCM16-9JGs_neBKxMynqETqz2bjkgDIfXs",
   authDomain: "image-market-1a175.firebaseapp.com",
   projectId: "image-market-1a175",
   storageBucket: "image-market-1a175.appspot.com",
@@ -16,4 +18,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth=getAuth(app)
 export const firestore=getFirestore(app)
+
 export const storage=getStorage(app)

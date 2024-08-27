@@ -22,7 +22,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       navigate(`/${user.accountType}/profile`);
-      toast.success("Login Successfull");
+      toast.success("Login Successful");
     } else if (loginUser.rejected.match(resultAction)) {
       setError("Login failed. Please check your credentials.");
     }
@@ -39,7 +39,7 @@ const Login = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Email Address :
+              Email Address:
             </label>
             <input
               type="email"
@@ -50,6 +50,7 @@ const Login = () => {
               placeholder="your@email.com"
               className="shadow-md rounded-md w-full px-3 py-2 border-gray-300 focus:outline-none focus:ring-black focus:border-black"
               aria-label="Email Address"
+              aria-required="true"
               required
             />
           </div>
@@ -58,7 +59,7 @@ const Login = () => {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Password :
+              Password:
             </label>
             <input
               type="password"
@@ -69,6 +70,7 @@ const Login = () => {
               placeholder="Enter Password Here"
               className="shadow-md rounded-md w-full px-3 py-2 border-gray-300 focus:outline-none focus:ring-black focus:border-black"
               aria-label="Password"
+              aria-required="true"
               required
             />
           </div>
@@ -89,7 +91,7 @@ const Login = () => {
           <button
             type="submit"
             className={`w-full py-2 px-4 rounded-md shadow-md font-medium text-white text-sm bg-black ${
-              loading && "opacity-50 cursor-not-allowed"
+              loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             disabled={loading}
             aria-label="Log In"

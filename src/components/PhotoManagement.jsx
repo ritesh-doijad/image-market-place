@@ -13,15 +13,16 @@ import { MdDelete } from "react-icons/md";
 const PhotoManagement = () => {
   const user = useSelector((state) => state.auth.user);
   const userId = user?.uid;
-  const userName = user?.userName;
   const posts = useSelector((state) => state.posts.myPosts);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const getMyPosts = async () => {
     try {
       if (!userId || posts.length > 0) return;
+      setLoading(true);
 
-      const productsRef = collection(firestore, "products");
+      const productsRef = collection(firestore, "posts");
       const q = query(productsRef, where("userId", "==", userId));
       const querySnapshot = await getDocs(q);
 
@@ -34,10 +35,13 @@ const PhotoManagement = () => {
           createdAt: data.createdAt ? data.createdAt.toMillis() : null, // Convert to milliseconds
         };
       });
-
+      toast.success("Data is Successfully fetch");
       dispatch(setMyPosts(postsData)); // Save the data to the state
     } catch (error) {
       toast.error("Failed to fetch posts");
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -51,29 +55,33 @@ const PhotoManagement = () => {
     <div className="flex flex-col sm:flex-row">
       <div>
         <DashBoardHeader />
-        {/* Dashboard header is here */}
         <ImageAdd />
-        {/* section where all images are displayed */}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 bg-transparent sm:bg-white p-5 w-[90vw] sm:w-[55vw] sm:h-[95vh] sm:overflow-y-scroll rounded-lg mx-auto sm:mx-0 sm:mt-8">
-        {posts?.map(({ id, title, price, imageUrl }) => (
-          <ImageCard
-            key={id}
-            img={imageUrl}
-            auther={userName}
-            title={title}
-            price={price}
-            icon1={
-              <BiSolidMessageSquareEdit
-                title="Edit"
-                className="text-2xl  text-black cursor-pointer hover:scale-110 transition-all  ease-linear duration-300"
-              />
-            }
-            icon2={
-              <MdDelete className="text-2xl  text-red-500 cursor-pointer hover:scale-110 transition-all  ease-linear duration-300" />
-            }
-          />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 bg-transparent sm:bg-white p-5 w-[90vw] sm:w-[55vw] sm:h-[95vh] sm:overflow-y-scroll scrollbar-hide rounded-lg mx-auto sm:mx-0 sm:mt-8">
+        {loading ? (
+          <p>Loading posts...</p>
+        ) : posts.length > 0 ? (
+          posts.map(({ id, title, price, userName, imageUrl }) => (
+            <ImageCard
+              key={id}
+              img={imageUrl}
+              auther={userName}
+              title={title}
+              price={price}
+              icon1={
+                <BiSolidMessageSquareEdit
+                  title="Edit"
+                  className="text-2xl text-black cursor-pointer hover:scale-110 transition-all ease-linear duration-300"
+                />
+              }
+              icon2={
+                <MdDelete className="text-2xl text-red-500 cursor-pointer hover:scale-110 transition-all ease-linear duration-300" />
+              }
+            />
+          ))
+        ) : (
+          <p>No posts available. Add a new product!</p>
+        )}
       </div>
     </div>
   );

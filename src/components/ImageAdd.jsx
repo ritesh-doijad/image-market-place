@@ -21,14 +21,14 @@ const ImageAdd = () => {
     e.preventDefault();
 
     const title = e.target.title.value;
-    const price = e.target.price.value;
+    const price = parseFloat(e.target.price.value);
 
-    if (!title || !price || !image) {
+    if (!title || isNaN(price) || !image) {
       toast.error("Please fill all the fields and select an image");
       return;
     }
 
-    if (title.trim() === "" || price.trim() === "") {
+    if (title.trim() === "" || price <= 0) {
       toast.error("Please fill all the fields and select an image");
       return;
     }
@@ -44,7 +44,7 @@ const ImageAdd = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          const formattedProgress = parseFloat(progress.toFixed(2)); // Format to 4 decimal places
+          const formattedProgress = parseFloat(progress.toFixed(2));
           setProgress(formattedProgress);
         },
         (error) => {
@@ -61,10 +61,13 @@ const ImageAdd = () => {
               price,
               imageUrl: downloadURL,
               userId: user.uid,
+              userName: user.userName,
+              purchasedBy: [],
               createdAt: new Date(),
             };
 
-            await addDoc(collection(firestore, "products"), post);
+            await addDoc(collection(firestore, "posts"), post);
+
             toast.success("Product added successfully");
             setProgress(0);
             setImage(null);

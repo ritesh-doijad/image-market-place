@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserData, logout } from "./redux/Slices/authSlice";
 import { auth } from "./Firebase/Firebase";
+import PaymentCard from "./components/PaymentCard";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,10 +26,11 @@ function App() {
 }, [dispatch]);
 
   return (
+  
     <>
       <Navbar />
       <GsapTransition />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

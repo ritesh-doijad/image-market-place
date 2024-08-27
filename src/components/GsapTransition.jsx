@@ -8,6 +8,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { useRef } from "react";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./ProtectedRoute";
 
 const GsapTransition = () => {
   const nodeRef = useRef(null);
@@ -24,10 +25,25 @@ const GsapTransition = () => {
       <Toaster />
       <Routes location={location}>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/Signup" element={<Signup />} />
-        <Route path="/seller/profile" element={<SellerDashboard />} />
-        <Route path="/buyer/profile" element={<BuyerDashboard />} />
+        <Route
+          path="/login"
+          element={<ProtectedRoute children={<Login />} requiresAuth={false} />}
+        />
+        <Route
+          path="/Signup"
+          element={
+            <ProtectedRoute children={<Signup />} requiresAuth={false} />
+          }
+        />
+        <Route
+          path="/buyer/profile"
+          element={<ProtectedRoute children={<BuyerDashboard />} />}
+        />
+        <Route
+          path="/seller/profile"
+          element={<ProtectedRoute children={<SellerDashboard />} />}
+        />
+        
       </Routes>
     </div>
   );

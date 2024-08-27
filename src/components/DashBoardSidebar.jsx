@@ -7,14 +7,17 @@ import { AiFillHome } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import { FaListUl } from "react-icons/fa";
 import { setTab } from "../redux/Slices/navSlice";
+import { logout } from "../redux/Slices/authSlice";
 
 const DashBoardSidebar = () => {
   const dispatch = useDispatch();
   const tab = useSelector((state) => state.nav.tab);
   const sidebar = useSelector((state) => state.nav.sidebar);
-  const pathname = useLocation();
+  const {pathname} = useLocation();
   const user = useSelector((state) => state.auth.user);
   const userName = user?.userName || "guset";
+  const role=user?.accountType || "buyer"
+ 
   return (
     <nav
       className={`fixed z-10 ${
@@ -63,9 +66,9 @@ const DashBoardSidebar = () => {
             onClick={() => dispatch(setTab("orders"))}
           >
             <FaListUl />
-            Orders
+            Orders History
           </li>
-          <li
+          {role=="buyer"&& (<li
             className={`w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center ${
               tab == "favourites" && "bg-black text-white"
             }`}
@@ -73,7 +76,8 @@ const DashBoardSidebar = () => {
           >
             <IoIosHeart />
             Favourites
-          </li>
+          </li>)}
+          
           <Link
             to="/"
             className="w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center"
@@ -83,7 +87,8 @@ const DashBoardSidebar = () => {
           </Link>
         </div>
       </div>
-      <li className="w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center">
+      <li className="w-full rounded-lg px-2 hover:bg-black hover:text-white cursor-pointer transition-all ease-linear duration-300 hover:scale-105 flex gap-2 justify-start items-center"
+      onClick={()=>dispatch(logout())}>
         <IoLogOut />
         Logout
       </li>
