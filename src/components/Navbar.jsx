@@ -18,7 +18,7 @@ const Navbar = () => {
     >
       {/* logo and site name */}
       <div className="flex items-center justify-between">
-        <img src="/picprismlogo.png" alt="site logo" className="w-[50px]" />
+        <img src="/imagemarketlogo.png" alt="site logo" className="w-[120px]" />
         <Link to="/" className="font-bold text-3xl">
           Pic Prism
         </Link>
