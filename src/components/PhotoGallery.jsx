@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, lazy, Suspense  } from 'react';
 import ImageCard from './ImageCard';
 import { FaShoppingCart, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,8 @@ import { getDoc, doc, collection, getDocs, addDoc, serverTimestamp, updateDoc, a
 import { firestore } from '../Firebase/Firebase';
 import { setAllPosts } from '../redux/Slices/postSlice';
 import toast from 'react-hot-toast';
-import useFavorites from '../hooks/useFavorites'; // Import the custom hook
+import useFavorites from '../hooks/useFavorites'; 
+
 
 const PhotoGallery = () => {
   const dispatch = useDispatch();
@@ -218,7 +219,7 @@ const PhotoGallery = () => {
         </div>
       )}
       <div className="w-[90%] mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-10 mt-5">
+        <h1 className="text-4xl font-semibold text-center text-gray-600 mb-10 mt-5">
           Discover &amp; Buy Stunning Images
         </h1>
 
