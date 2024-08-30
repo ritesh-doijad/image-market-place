@@ -13,6 +13,7 @@
     "@ramonak/react-progress-bar": "^5.2.0",
     "@reduxjs/toolkit": "^2.2.7",
     "dotenv": "^16.4.5",
+    "file-saver": "^2.0.5",
     "firebase": "^10.12.5",
     "gsap": "^3.12.5",
     "lodash.debounce": "^4.0.8",
