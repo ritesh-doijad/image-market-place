@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageCard = ({ id, img, auther, title, price, icon1, icon2 }) => {
+const ImageCard = ({ id, img, author, title, price, icon1, icon2 }) => {
     return (
         <div key={id} className='max-w-sm w-full  rounded-lg bg-white shadow-lg p-4 m-2'>
             <div className='w-full h-[30vh] overflow-hidden rounded-2xl'>
@@ -11,7 +11,7 @@ const ImageCard = ({ id, img, auther, title, price, icon1, icon2 }) => {
                 />
             </div>
             <p className='font-semibold text-white bg-black w-fit px-4 py-1 mt-3 rounded-full text-xs sm:text-sm'>
-                {"@" + auther?.charAt(0).toUpperCase() + auther?.slice(1)}
+                {"@" + author?.charAt(0).toUpperCase() + author?.slice(1)}
             </p>
             <div className='flex justify-between items-center mt-2'>
                 <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, lazy, Suspense  } from 'react';
+import React, { useEffect, useState, useRef  } from 'react';
 import ImageCard from './ImageCard';
 import { FaShoppingCart, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
